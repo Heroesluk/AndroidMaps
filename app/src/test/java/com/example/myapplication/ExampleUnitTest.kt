@@ -1,7 +1,6 @@
 package com.example.myapplication
 
 import com.example.myapplication.model.Entry
-import com.example.myapplication.model.Event
 import com.example.myapplication.model.Place
 import org.junit.Test
 
@@ -15,10 +14,6 @@ import org.junit.Assert.*
 class ExampleUnitTest {
     @Test
     fun addition_isCorrect() {
-        val entry = Entry(
-            10, "Ato ramen", "Visit at ato ramen", Event("08-10-2023"), 1,
-            Place("Piotrkowska")
-        )
 
 
     }
