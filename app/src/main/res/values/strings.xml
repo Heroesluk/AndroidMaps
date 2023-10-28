@@ -7,4 +7,5 @@
     <string name="place_score">Score</string>
     <string name="scores">scores</string>
     <string name="place_visit_date">Visit date</string>
+    <string name="add_new_place">Add</string>
 </resources>

@@ -1,13 +1,14 @@
 package com.example.myapplication
 
-import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Button
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExposedDropdownMenuBox
@@ -28,20 +29,24 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 
 
-fun getScoreList(): List<Int> {
-    return listOf(1, 2, 3, 4, 5)
+fun getScoreList(): List<String> {
+    return listOf("1", "2", "3", "4")
 
 }
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AddPlace() {
+fun AddPlace( onNavigateToHome: () -> Unit) {
 
     var placeName by rememberSaveable { mutableStateOf("") }
     var placeDescription by rememberSaveable { mutableStateOf("") }
     var placeLocation by rememberSaveable { mutableStateOf("") }
     var placeScore by rememberSaveable { mutableStateOf("") }
+    var placeEventDate by rememberSaveable { mutableStateOf("") }
+
+
+
     Column(
         modifier = Modifier
             .padding(16.dp, 16.dp)
@@ -119,7 +124,24 @@ fun AddPlace() {
             style = MaterialTheme.typography.bodyLarge
         )
 
-        Demo_ExposedDropdownMenuBox()
+        Demo_ExposedDropdownMenuBox { placeEventDate = it }
+
+
+        Button(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(vertical = 16.dp)
+                .height(56.dp),
+            onClick = onNavigateToHome,
+            shape = MaterialTheme.shapes.extraLarge
+        ) {
+            Text(
+                text = stringResource(id = R.string.add_new_place),
+                style = MaterialTheme.typography.bodyLarge
+            )
+        }
+
+
 
 
     }
@@ -128,7 +150,7 @@ fun AddPlace() {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun Demo_ExposedDropdownMenuBox() {
+fun Demo_ExposedDropdownMenuBox(eventState: (String) -> Unit) {
     val context = LocalContext.current
     val options = arrayOf(" - ", "Seen", "Plan to see")
     var expanded by remember { mutableStateOf(false) }
@@ -157,9 +179,9 @@ fun Demo_ExposedDropdownMenuBox() {
                 DropdownMenuItem(
                     text = { Text(text = item) },
                     onClick = {
+                        eventState(item)
                         selectedText = item
                         expanded = false
-                        Toast.makeText(context, item, Toast.LENGTH_SHORT).show()
                     }
                 )
             }

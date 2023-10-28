@@ -1,5 +1,8 @@
 package com.example.myapplication
 
+//import androidx.navigation.compose.NavHost
+//import androidx.navigation.compose.composable
+//import androidx.navigation.compose.rememberNavController
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -7,12 +10,8 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.style.TextDecoration
@@ -26,13 +25,40 @@ private val defaultSpacerSize = 16.dp
 
 
 class MainActivity : ComponentActivity() {
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            DisplayPlace()
+//            mainDisplay()
+            DisplayPlaces()
         }
     }
 }
+
+
+//@Composable
+//fun mainDisplay() {
+//    var navController = rememberNavController()
+//    var modifier = Modifier
+//    var startDestination: String = "place"
+//
+//
+//    NavHost(
+//        modifier = modifier,
+//        navController = navController,
+//        startDestination = startDestination
+//    ) {
+//        composable("place") {
+//            AddPlace(
+//                onNavigateToHome = { navController.navigate("home") },
+//                )
+//        }
+//        composable("home") {
+//            DisplayPlaces()
+//        }
+//    }
+//}
 
 @Composable
 fun generateEntry(entry: Entry) {
@@ -59,21 +85,11 @@ fun generateEntry(entry: Entry) {
 }
 
 
+
+
 @Preview(showBackground = true)
 @Composable
-fun DisplayPlace() {
-
-    Surface(
-        modifier = Modifier.fillMaxSize(),
-        color = MaterialTheme.colorScheme.background
-    ) {
-        AddPlace()
-    }
-
-}
-
-@Composable
-fun DisplayPlaces(){
+fun DisplayPlaces() {
     Column {
         numbers.forEach { entry ->
             generateEntry(entry)
