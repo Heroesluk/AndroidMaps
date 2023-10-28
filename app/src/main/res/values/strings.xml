@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">My Application</string>
+    <string name="add_place">Add place</string>
+    <string name="place_name">Place name</string>
+    <string name="place_description">Place description</string>
+    <string name="place_location">Location</string>
+    <string name="place_score">Score</string>
+    <string name="scores">scores</string>
+    <string name="place_visit_date">Visit date</string>
 </resources>
