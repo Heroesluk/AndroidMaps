@@ -3,6 +3,7 @@ plugins {
     id("org.jetbrains.kotlin.android")
 }
 
+
 android {
     namespace = "com.example.myapplication"
     compileSdk = 33
@@ -51,6 +52,9 @@ android {
 
 dependencies {
 
+    implementation("io.kotlintest:kotlintest-runner-junit5:3.1.9")
+    testImplementation("org.junit.jupiter:junit-jupiter:5.8.0")
+
     implementation("androidx.navigation:navigation-compose:2.7.4")
     implementation("androidx.compose.material3:material3")
     implementation("androidx.core:core-ktx:1.9.0")
@@ -69,3 +73,4 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
 }
+

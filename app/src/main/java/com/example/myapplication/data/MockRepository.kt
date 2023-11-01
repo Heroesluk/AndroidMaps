@@ -2,8 +2,8 @@ package com.example.myapplication.data
 
 import com.example.myapplication.model.Entry
 
-class MockRepository : EntryRepository {
-    private val data: MutableList<Entry> = mutableListOf();
+class MockRepository(data: MutableList<Entry>) : EntryRepository {
+    private var data: MutableList<Entry> = mutableListOf();
     override fun getEntry(id: Int): Entry {
         return data.first { it.id == id }
     }
@@ -44,6 +44,8 @@ class MockRepository : EntryRepository {
         return false
 
     }
+
+
 
 
 }
