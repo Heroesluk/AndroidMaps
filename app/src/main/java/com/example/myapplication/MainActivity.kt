@@ -31,7 +31,8 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
 //            mainDisplay()
-            DisplayPlaces()
+            navigation()
+//            DisplayPlaces()
         }
     }
 }

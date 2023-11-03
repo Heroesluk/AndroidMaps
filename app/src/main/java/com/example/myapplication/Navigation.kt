@@ -72,7 +72,7 @@ fun MainScreen(navController: NavController) {
 
         Button(
             onClick = {
-                navController.navigate(Screen.DetailScreen.route)
+                navController.navigate(Screen.DetailScreen.withArgs(text))
 
             }
         ) {
