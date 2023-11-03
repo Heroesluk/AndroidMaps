@@ -1,10 +1,16 @@
+import org.gradle.internal.impldep.org.fusesource.jansi.AnsiRenderer.test
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
 }
 
 
+
+
 android {
+
+
     namespace = "com.example.myapplication"
     compileSdk = 34
 
@@ -48,12 +54,18 @@ android {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
+
+}
+
+tasks.withType<Test> {
+    useJUnitPlatform()
 }
 
 dependencies {
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.4.2")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.4.2")
     implementation("com.google.guava:guava:27.0.1-android")
     implementation("androidx.navigation:navigation-compose:2.5.3")
-    testImplementation("org.junit.jupiter:junit-jupiter:5.8.0")
     implementation("androidx.compose.material3:material3")
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
@@ -62,12 +74,10 @@ dependencies {
     implementation("androidx.compose.ui:ui")
     implementation("androidx.compose.ui:ui-graphics")
     implementation("androidx.compose.ui:ui-tooling-preview")
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
     androidTestImplementation(platform("androidx.compose:compose-bom:2023.03.00"))
-    androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
+
+
 }
 

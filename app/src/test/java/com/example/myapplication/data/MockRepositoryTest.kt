@@ -81,8 +81,8 @@ class MockRepositoryTest {
         var repoPlace1 = mockRepository.getEntry(1)
 
         // then
-        Assertions.assertEquals(repoPlace0,place0)
-        Assertions.assertEquals(repoPlace1,place1)
+        Assertions.assertEquals(repoPlace0, place0)
+        Assertions.assertEquals(repoPlace1, place1)
     }
 
     @org.junit.jupiter.api.Test
@@ -90,7 +90,7 @@ class MockRepositoryTest {
         // when
         val places = mockRepository.getEntries()
         // then
-        Assertions.assertEquals(places.size,4)
+        Assertions.assertEquals(places.size, 4)
     }
 
     @org.junit.jupiter.api.Test
@@ -126,5 +126,21 @@ class MockRepositoryTest {
 
     @org.junit.jupiter.api.Test
     fun replaceEntry() {
+    }
+
+    @org.junit.jupiter.api.Test
+    fun passAndEdit(){
+        var test1 = Test1()
+        Assertions.assertEquals(mockRepository.getEntries().size,4)
+        test1.editRepository(mockRepository)
+        Assertions.assertEquals(mockRepository.getEntries().size,3)
+    }
+}
+
+
+class Test1 {
+    public fun editRepository(repo: MockRepository){
+        repo.deleteEntry(0);
+
     }
 }
