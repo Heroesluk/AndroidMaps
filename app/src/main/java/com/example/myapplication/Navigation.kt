@@ -29,22 +29,33 @@ import androidx.navigation.navArgument
 @Composable
 fun navigation() {
     val navController = rememberNavController()
-    NavHost(navController = navController, startDestination = Screen.MainScreen.route) {
+    NavHost(navController = navController, startDestination = Screen.DisplayPlaces.route) {
         composable(route = Screen.MainScreen.route) {
             MainScreen(navController = navController)
 
 
         }
-        composable(route = Screen.DetailScreen.route + "/{name}",
-            arguments = listOf(
-            navArgument("name") {
-                type = NavType.StringType
-                defaultValue = "Male"
-                nullable = true
-            }
-        )) { entry ->
-            DetailScreen(name = entry.arguments?.getString("name"))
+
+        composable(route = Screen.DisplayPlaces.route) {
+            DisplayPlaces(navController)
+
         }
+
+        composable(route = Screen.AddPlace.route) {
+            AddPlace(navController)
+
+        }
+
+//        composable(route = Screen.DetailScreen.route + "/{name}",
+//            arguments = listOf(
+//            navArgument("name") {
+//                type = NavType.StringType
+//                defaultValue = "Male"
+//                nullable = true
+//            }
+//        )) { entry ->
+//            DetailScreen(name = entry.arguments?.getString("name"))
+//        }
     }
 }
 
@@ -70,14 +81,15 @@ fun MainScreen(navController: NavController) {
 
         Spacer(modifier = Modifier.height(8.dp))
 
-        Button(
-            onClick = {
-                navController.navigate(Screen.DetailScreen.withArgs(text))
+    }
 
-            }
-        ) {
-            Text(text = "clickMe")
+    Button(
+        onClick = {
+            navController.navigate(Screen.DisplayPlaces.route)
+
         }
+    ) {
+        Text(text = "clickMe")
     }
 }
 

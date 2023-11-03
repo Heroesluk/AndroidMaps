@@ -10,14 +10,23 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Button
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.myapplication.data.numbers
 import com.example.myapplication.model.Entry
 
@@ -86,14 +95,27 @@ fun generateEntry(entry: Entry) {
 }
 
 
-
-
-@Preview(showBackground = true)
 @Composable
-fun DisplayPlaces() {
+fun DisplayPlaces(navController: NavController) {
+
     Column {
         numbers.forEach { entry ->
             generateEntry(entry)
+        }
+
+        Spacer(modifier = Modifier.height(8.dp))
+        Button(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(vertical = 16.dp)
+                .height(56.dp),
+            onClick = { navController.navigate(Screen.AddPlace.route) },
+            shape = MaterialTheme.shapes.extraLarge
+        ) {
+            Text(
+                text = stringResource(id = R.string.add_new_place),
+                style = MaterialTheme.typography.bodyLarge
+            )
         }
     }
 

@@ -27,6 +27,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 
 
 fun getScoreList(): List<String> {
@@ -37,7 +38,7 @@ fun getScoreList(): List<String> {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AddPlace( onNavigateToHome: () -> Unit) {
+fun AddPlace(navController: NavController) {
 
     var placeName by rememberSaveable { mutableStateOf("") }
     var placeDescription by rememberSaveable { mutableStateOf("") }
@@ -132,7 +133,7 @@ fun AddPlace( onNavigateToHome: () -> Unit) {
                 .fillMaxWidth()
                 .padding(vertical = 16.dp)
                 .height(56.dp),
-            onClick = onNavigateToHome,
+            onClick = { navController.navigate(Screen.DisplayPlaces.route) },
             shape = MaterialTheme.shapes.extraLarge
         ) {
             Text(
@@ -140,8 +141,6 @@ fun AddPlace( onNavigateToHome: () -> Unit) {
                 style = MaterialTheme.typography.bodyLarge
             )
         }
-
-
 
 
     }
