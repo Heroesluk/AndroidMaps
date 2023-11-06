@@ -28,18 +28,16 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.example.myapplication.UI_logic.AddEditPlaceEvent
+import com.example.myapplication.UI_logic.MainViewModel
+import com.example.myapplication.UI_logic.PlaceEvent
 import com.example.myapplication.data.MockRepository
 
-
-fun getScoreList(): List<String> {
-    return listOf("1", "2", "3", "4")
-
-}
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AddPlace(navController: NavController) {
+fun AddPlace(navController: NavController, viewModel: MainViewModel) {
 
     var placeName by rememberSaveable { mutableStateOf("") }
     var placeDescription by rememberSaveable { mutableStateOf("") }
@@ -135,6 +133,7 @@ fun AddPlace(navController: NavController) {
                 .padding(vertical = 16.dp)
                 .height(56.dp),
             onClick = {
+                viewModel.onEvent(PlaceEvent.SavePlace("new Place"))
                 navController.navigate(Screen.DisplayPlaces.route) },
             shape = MaterialTheme.shapes.extraLarge
         ) {
