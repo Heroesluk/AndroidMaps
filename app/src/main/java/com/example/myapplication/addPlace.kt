@@ -28,6 +28,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.example.myapplication.data.MockRepository
 
 
 fun getScoreList(): List<String> {
@@ -133,7 +134,8 @@ fun AddPlace(navController: NavController) {
                 .fillMaxWidth()
                 .padding(vertical = 16.dp)
                 .height(56.dp),
-            onClick = { navController.navigate(Screen.DisplayPlaces.route) },
+            onClick = {
+                navController.navigate(Screen.DisplayPlaces.route) },
             shape = MaterialTheme.shapes.extraLarge
         ) {
             Text(

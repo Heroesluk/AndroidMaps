@@ -62,6 +62,11 @@ tasks.withType<Test> {
 }
 
 dependencies {
+    val lifecycle_version = "2.6.2"
+
+
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version")
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.4.2")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.4.2")
     implementation("com.google.guava:guava:27.0.1-android")

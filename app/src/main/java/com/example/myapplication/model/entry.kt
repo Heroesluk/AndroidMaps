@@ -2,17 +2,17 @@ package com.example.myapplication.model
 
 import androidx.annotation.DrawableRes
 
-data class Entry(
+data class Place(
     val id: Int,
     val name: String,
     val description: String,
     val date: String,
     val score: Int,
-    val place: Place,
+    val location: Location,
     @DrawableRes val imageId: Int
     )
 
-data class Place(
+data class Location(
     val id: Int,
     val coordinates: String
     // tbd

@@ -27,7 +27,9 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 
 @Composable
-fun navigation() {
+fun navigation(viewModel: MainViewModel) {
+
+
     val navController = rememberNavController()
     NavHost(navController = navController, startDestination = Screen.DisplayPlaces.route) {
         composable(route = Screen.MainScreen.route) {
@@ -37,7 +39,7 @@ fun navigation() {
         }
 
         composable(route = Screen.DisplayPlaces.route) {
-            DisplayPlaces(navController)
+            DisplayPlaces(navController = navController, model = viewModel)
 
         }
 
@@ -46,16 +48,6 @@ fun navigation() {
 
         }
 
-//        composable(route = Screen.DetailScreen.route + "/{name}",
-//            arguments = listOf(
-//            navArgument("name") {
-//                type = NavType.StringType
-//                defaultValue = "Male"
-//                nullable = true
-//            }
-//        )) { entry ->
-//            DetailScreen(name = entry.arguments?.getString("name"))
-//        }
     }
 }
 

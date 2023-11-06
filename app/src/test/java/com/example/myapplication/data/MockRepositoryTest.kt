@@ -1,7 +1,6 @@
 package com.example.myapplication.data
 
 import com.example.myapplication.R
-import com.example.myapplication.model.Entry
 import com.example.myapplication.model.Place
 import org.junit.jupiter.api.Assertions
 
@@ -12,7 +11,7 @@ class MockRepositoryTest {
     fun setUp() {
         mockRepository = MockRepository(
             mutableListOf(
-                Entry(
+                Place(
                     0,
                     "Tower",
                     "High tower",
@@ -21,7 +20,7 @@ class MockRepositoryTest {
                     Place(0, "Street 10"),
                     R.drawable.ramen
                 ),
-                Entry(
+                Place(
                     1,
                     "Castle",
                     "Big Castle",
@@ -30,7 +29,7 @@ class MockRepositoryTest {
                     Place(1, "10,10"),
                     R.drawable.ramen
                 ),
-                Entry(
+                Place(
                     2,
                     "Restaurant",
                     "Good food",
@@ -39,7 +38,7 @@ class MockRepositoryTest {
                     Place(2, "Poland"),
                     R.drawable.ramen
                 ),
-                Entry(
+                Place(
                     3,
                     "Lake",
                     "Smell bad",
@@ -57,7 +56,7 @@ class MockRepositoryTest {
     @org.junit.jupiter.api.Test
     fun getEntry() {
         // given
-        var place0 = Entry(
+        var place0 = Place(
             0,
             "Tower",
             "High tower",
@@ -67,7 +66,7 @@ class MockRepositoryTest {
             R.drawable.ramen
         )
 
-        var place1 = Entry(
+        var place1 = Place(
             1,
             "Castle",
             "Big Castle",
@@ -96,7 +95,7 @@ class MockRepositoryTest {
     @org.junit.jupiter.api.Test
     fun saveEntry() {
         // given
-        var entry = Entry(
+        var entry = Place(
             7,
             "ABC",
             "ASASA tower",
@@ -105,7 +104,7 @@ class MockRepositoryTest {
             Place(0, "Street 10"),
             R.drawable.ramen
         )
-        var entryIdExists = Entry(
+        var entryIdExists = Place(
             1,
             "ABSASAC",
             "ASASA tower",

@@ -1,21 +1,21 @@
 package com.example.myapplication.data
 
-import com.example.myapplication.model.Entry
+import com.example.myapplication.model.Place
 
-class MockRepository(private var data: MutableList<Entry>) : EntryRepository {
-    override fun getEntry(id: Int): Entry {
+class MockRepository(private var data: MutableList<Place>) : EntryRepository {
+    override fun getEntry(id: Int): Place {
         return data.first { it.id == id }
     }
 
-    override fun getEntries(): List<Entry> {
+    override fun getEntries(): List<Place> {
         return data.toList();
     }
 
-    override fun getEntriesOrderedByScore(): List<Entry> {
+    override fun getEntriesOrderedByScore(): List<Place> {
         return data.toList().sortedBy { it.score };
     }
 
-    override fun saveEntry(entry: Entry): Boolean {
+    override fun saveEntry(entry: Place): Boolean {
         if ((data.find { it.id == entry.id }) == null) {
             data.add(entry)
             return true
