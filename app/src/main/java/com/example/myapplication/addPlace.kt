@@ -34,7 +34,6 @@ import com.example.myapplication.UI_logic.PlaceEvent
 import com.example.myapplication.data.MockRepository
 
 
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AddPlace(navController: NavController, viewModel: MainViewModel) {
@@ -133,8 +132,17 @@ fun AddPlace(navController: NavController, viewModel: MainViewModel) {
                 .padding(vertical = 16.dp)
                 .height(56.dp),
             onClick = {
-                viewModel.onEvent(PlaceEvent.SavePlace("new Place"))
-                navController.navigate(Screen.DisplayPlaces.route) },
+                viewModel.onEvent(
+                    PlaceEvent.SavePlace(
+                        placeName,
+                        placeDescription,
+                        placeLocation,
+                        placeScore,
+                        placeEventDate
+                    )
+                )
+                navController.navigate(Screen.DisplayPlaces.route)
+            },
             shape = MaterialTheme.shapes.extraLarge
         ) {
             Text(

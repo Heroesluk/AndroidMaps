@@ -45,10 +45,16 @@ class MainViewModel() : ViewModel() {
 
                 placeRepository.saveEntry(
                     Place(
-                        10, placeEvent.name, "blabla", "10", 5,
-                        Location(0, "tak"), R.drawable.ramen
+                        10,
+                        placeEvent.placeName,
+                        placeEvent.placeDescription,
+                        placeEvent.placeEventData,
+                        placeEvent.placeScore.toInt(),
+                        Location(0, placeEvent.placeLocation),
+                        R.drawable.ramen
 
-                    ))
+                    )
+                )
                 getPlaces()
 
             }
