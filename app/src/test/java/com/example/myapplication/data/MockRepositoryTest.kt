@@ -1,6 +1,7 @@
 package com.example.myapplication.data
 
 import com.example.myapplication.R
+import com.example.myapplication.model.Location
 import com.example.myapplication.model.Place
 import org.junit.jupiter.api.Assertions
 
@@ -17,7 +18,7 @@ class MockRepositoryTest {
                     "High tower",
                     "21-10-2023",
                     1,
-                    Place(0, "Street 10"),
+                    Location(0, "Street 10"),
                     R.drawable.ramen
                 ),
                 Place(
@@ -26,7 +27,7 @@ class MockRepositoryTest {
                     "Big Castle",
                     "21-11-2023",
                     5,
-                    Place(1, "10,10"),
+                    Location(1, "10,10"),
                     R.drawable.ramen
                 ),
                 Place(
@@ -35,7 +36,7 @@ class MockRepositoryTest {
                     "Good food",
                     "Plan to visit",
                     4,
-                    Place(2, "Poland"),
+                    Location(2, "Poland"),
                     R.drawable.ramen
                 ),
                 Place(
@@ -44,7 +45,7 @@ class MockRepositoryTest {
                     "Smell bad",
                     "Past",
                     2,
-                    Place(3, "France"),
+                    Location(3, "France"),
                     R.drawable.ramen
                 ),
 
@@ -62,7 +63,7 @@ class MockRepositoryTest {
             "High tower",
             "21-10-2023",
             1,
-            Place(0, "Street 10"),
+            Location(0, "Street 10"),
             R.drawable.ramen
         )
 
@@ -72,7 +73,7 @@ class MockRepositoryTest {
             "Big Castle",
             "21-11-2023",
             5,
-            Place(1, "10,10"),
+            Location(1, "10,10"),
             R.drawable.ramen
         )
         // when
@@ -101,7 +102,7 @@ class MockRepositoryTest {
             "ASASA tower",
             "21-10-2023",
             1,
-            Place(0, "Street 10"),
+            Location(0, "Street 10"),
             R.drawable.ramen
         )
         var entryIdExists = Place(
@@ -110,7 +111,7 @@ class MockRepositoryTest {
             "ASASA tower",
             "21-10-2023",
             1,
-            Place(0, "Street 10"),
+            Location(0, "Street 10"),
             R.drawable.ramen
         )
         // then

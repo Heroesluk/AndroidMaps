@@ -16,12 +16,14 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -35,10 +37,14 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavController
+import com.example.myapplication.UI_logic.Event
+import com.example.myapplication.UI_logic.PlacesState
 import com.example.myapplication.data.MockRepository
 import com.example.myapplication.data.numbers
 import com.example.myapplication.model.Place
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 private val defaultSpacerSize = 16.dp
@@ -92,6 +98,7 @@ class MainActivity : ComponentActivity() {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun generateEntry(entry: Place) {
+
     Row(horizontalArrangement = Arrangement.SpaceBetween) {
         Column {
             Text(
@@ -110,7 +117,8 @@ fun generateEntry(entry: Place) {
         }
         Image(
             painter = painterResource(entry.imageId),
-            contentDescription = "Image"
+            contentDescription = "Image",
+            modifier = Modifier.size(150.dp)
         )
 
     }
@@ -120,9 +128,12 @@ fun generateEntry(entry: Place) {
 @Composable
 fun DisplayPlaces(navController: NavController, model: MainViewModel) {
 
+    val state = model.state
+
+
     Column {
-        model.getPlaces().forEach { entry ->
-            generateEntry(entry)
+        state.value.places.forEach { place ->
+            generateEntry(place)
         }
 
         Spacer(modifier = Modifier.height(8.dp))
@@ -139,15 +150,60 @@ fun DisplayPlaces(navController: NavController, model: MainViewModel) {
                 style = MaterialTheme.typography.bodyLarge
             )
         }
+
+        Button(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(vertical = 16.dp)
+                .height(56.dp),
+            onClick = { model.onEvent(Event.RemovePlaceEvent) },
+            shape = MaterialTheme.shapes.extraLarge
+        ) {
+            Text(
+                text = stringResource(id = R.string.remove_place),
+                style = MaterialTheme.typography.bodyLarge
+            )
+        }
+
     }
 
 }
 
 
 class MainViewModel() : ViewModel() {
-    private val placeRepository = MockRepository(numbers)
 
-    fun getPlaces(): List<Place> {
-        return placeRepository.getEntries()
+
+    private val placeRepository = MockRepository(numbers)
+    private val _state = mutableStateOf(PlacesState())
+    val state = _state
+    init {
+        getPlaces()
     }
+
+
+    fun getPlaces() {
+        viewModelScope.launch {
+            val entries = placeRepository.getEntries()
+            _state.value = _state.value.copy(places = entries)
+
+        }
+
+
+    }
+
+    fun onEvent(event: Event) {
+        when (event) {
+            is Event.RemovePlaceEvent -> {
+                viewModelScope.launch {
+                    placeRepository.deleteEntry(0);
+                    getPlaces()
+                }
+            }
+
+            else -> {
+            }
+        }
+    }
+
+
 }
