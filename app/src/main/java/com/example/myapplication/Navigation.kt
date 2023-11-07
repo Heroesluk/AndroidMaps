@@ -31,11 +31,6 @@ fun navigation(viewModel: MainViewModel) {
 
     val navController = rememberNavController()
     NavHost(navController = navController, startDestination = Screen.DisplayPlaces.route) {
-        composable(route = Screen.MainScreen.route) {
-            MainScreen(navController = navController)
-
-
-        }
 
         composable(route = Screen.DisplayPlaces.route) {
             DisplayPlaces(navController = navController, model = viewModel)
@@ -50,46 +45,3 @@ fun navigation(viewModel: MainViewModel) {
     }
 }
 
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun MainScreen(navController: NavController) {
-    var text by remember {
-        mutableStateOf("")
-
-    }
-    Column(
-        verticalArrangement = Arrangement.Center,
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(horizontal = 50.dp)
-    ) {
-        TextField(
-            value = text,
-            onValueChange = {
-                text = it
-            })
-
-        Spacer(modifier = Modifier.height(8.dp))
-
-    }
-
-    Button(
-        onClick = {
-            navController.navigate(Screen.DisplayPlaces.route)
-
-        }
-    ) {
-        Text(text = "clickMe")
-    }
-}
-
-
-@Composable
-fun DetailScreen(name: String?) {
-    Box(modifier = Modifier.fillMaxSize()) {
-        Text(text = "hello, $name")
-    }
-
-
-}

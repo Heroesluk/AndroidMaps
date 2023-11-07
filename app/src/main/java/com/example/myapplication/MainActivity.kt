@@ -95,11 +95,10 @@ class MainActivity : ComponentActivity() {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun generateEntry(entry: Place,model: MainViewModel) {
+fun generateEntry(entry: Place, model: MainViewModel) {
     var expanded by remember { mutableStateOf(false) }
     //this feels like affects performance hard so i'll leave it for now
 //    var dict = mapOf(true to 200.dp, false to 100.dp)
-
 
 
     Row(
@@ -143,39 +142,43 @@ fun generateEntry(entry: Place,model: MainViewModel) {
             modifier = Modifier.size(80.dp)
         )
 
-//        Row(modifier = Modifier.fillMaxWidth()) {
-//
-//            Button(
-//                modifier = Modifier
-//                    .padding(vertical = 16.dp)
-//                    .height(56.dp)
-//                    .fillMaxWidth(0.2f),
-//                onClick = { model.onEvent(PlaceEvent.RemovePlacePlaceEvent) },
-//                shape = MaterialTheme.shapes.extraLarge
-//            ) {
-//                Text(
-//                    text = stringResource(id = R.string.add_new_place),
-//                    style = MaterialTheme.typography.bodyLarge
-//                )
-//            }
-//
-//            Button(
-//                modifier = Modifier
-//                    .padding(vertical = 16.dp)
-//                    .height(56.dp)
-//                    .fillMaxWidth(0.2f),
-//                onClick = { model.onEvent(PlaceEvent.RemovePlacePlaceEvent) },
-//                shape = MaterialTheme.shapes.extraLarge
-//            ) {
-//                Text(
-//                    text = stringResource(id = R.string.remove_place),
-//                    style = MaterialTheme.typography.bodyLarge
-//                )
-//            }
-//
-//        }
 
     }
+
+    if (expanded) {
+        Row(modifier = Modifier.fillMaxWidth()) {
+
+            Button(
+                modifier = Modifier
+                    .padding(vertical = 16.dp)
+                    .height(56.dp)
+                    .fillMaxWidth(0.5f),
+                onClick = { model.onEvent(PlaceEvent.EditPlace(entry.name)) },
+                shape = MaterialTheme.shapes.extraLarge
+            ) {
+                Text(
+                    text = stringResource(id = R.string.add_new_place),
+                    style = MaterialTheme.typography.bodyLarge
+                )
+            }
+
+            Button(
+                modifier = Modifier
+                    .padding(vertical = 16.dp)
+                    .height(56.dp)
+                    .fillMaxWidth(0.5f),
+                onClick = { model.onEvent(PlaceEvent.RemovePlacePlaceEvent) },
+                shape = MaterialTheme.shapes.extraLarge
+            ) {
+                Text(
+                    text = stringResource(id = R.string.remove_place),
+                    style = MaterialTheme.typography.bodyLarge
+                )
+            }
+
+        }
+    }
+
 
 }
 
