@@ -8,6 +8,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -21,6 +22,10 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -85,8 +90,12 @@ class MainActivity : ComponentActivity() {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun generateEntry(entry: Place) {
+    var expanded by remember { mutableStateOf(false) }
 
-    Row(horizontalArrangement = Arrangement.SpaceBetween) {
+    Row(horizontalArrangement = Arrangement.SpaceBetween,
+        modifier = Modifier.clickable {
+            expanded = true;
+    }) {
         Column {
             Text(
                 text = entry.name, fontSize = 18.sp,
@@ -98,7 +107,9 @@ fun generateEntry(entry: Place) {
                 style = MaterialTheme.typography.bodyLarge,
                 textDecoration = TextDecoration.Underline
             )
-            Text(text = entry.description, fontSize = 8.sp)
+            if (expanded) {
+                Text(text = entry.description, fontSize = 8.sp)
+            }
 //            Text(text = entry.date)
 //            Text(text = entry.score.toString())
         }
