@@ -8,5 +8,8 @@ sealed class PlaceEvent {
         val placeScore: String, val placeEventData: String
     ) : PlaceEvent()
 
+    data class EditPlace(val placeName: String): PlaceEvent()
+
+
 
 }

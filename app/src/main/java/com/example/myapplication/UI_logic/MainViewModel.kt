@@ -59,6 +59,10 @@ class MainViewModel() : ViewModel() {
 
             }
 
+            is PlaceEvent.EditPlace -> {
+
+            }
+
             else -> {
             }
         }

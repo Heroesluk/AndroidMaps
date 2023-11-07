@@ -19,7 +19,7 @@ val numbers: MutableList<Place> = mutableListOf(
     Place(
         0,
         "Tower",
-        "High tower",
+        "High tower, High towerHigh towerHigh tower, sadsaldkasdjsak sdajksdsajlkdsajdlksajdlkaj,High tower, High towerHigh towerHigh tower, sadsaldkasdjsak sdajksdsajlkdsajdlksajdlkaj",
         "21-10-2023",
         1,
         Location(0, "Street 10"),
@@ -28,7 +28,7 @@ val numbers: MutableList<Place> = mutableListOf(
     Place(
         1,
         "Castle",
-        "Big Castle",
+        "High tower, High towerHigh towerHigh tower, sadsaldkasdjsak sdajksdsajlkdsajdlksajdlkaj,High tower, High towerHigh towerHigh tower, sadsaldkasdjsak sdajksdsajlkdsajdlksajdlkaj",
         "21-11-2023",
         5,
         Location(1, "10,10"),

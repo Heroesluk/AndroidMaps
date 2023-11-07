@@ -8,15 +8,18 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
@@ -27,9 +30,12 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
@@ -89,13 +95,21 @@ class MainActivity : ComponentActivity() {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun generateEntry(entry: Place) {
+fun generateEntry(entry: Place,model: MainViewModel) {
     var expanded by remember { mutableStateOf(false) }
+    //this feels like affects performance hard so i'll leave it for now
+//    var dict = mapOf(true to 200.dp, false to 100.dp)
 
-    Row(horizontalArrangement = Arrangement.SpaceBetween,
-        modifier = Modifier.clickable {
-            expanded = true;
-    }) {
+
+
+    Row(
+        modifier = Modifier
+            .clickable {
+                expanded = !expanded;
+            }
+            .fillMaxWidth()
+//            .height(dict.get(expanded)!!)
+    ) {
         Column {
             Text(
                 text = entry.name, fontSize = 18.sp,
@@ -108,16 +122,58 @@ fun generateEntry(entry: Place) {
                 textDecoration = TextDecoration.Underline
             )
             if (expanded) {
-                Text(text = entry.description, fontSize = 8.sp)
+                Text(
+                    text = entry.description,
+                    fontSize = 8.sp,
+                    modifier = Modifier.fillMaxWidth(0.4f)
+                )
             }
 //            Text(text = entry.date)
 //            Text(text = entry.score.toString())
         }
+        Spacer(
+            Modifier
+                .weight(1f)
+                .fillMaxWidth()
+        )
+
         Image(
             painter = painterResource(entry.imageId),
             contentDescription = "Image",
-            modifier = Modifier.size(150.dp)
+            modifier = Modifier.size(80.dp)
         )
+
+//        Row(modifier = Modifier.fillMaxWidth()) {
+//
+//            Button(
+//                modifier = Modifier
+//                    .padding(vertical = 16.dp)
+//                    .height(56.dp)
+//                    .fillMaxWidth(0.2f),
+//                onClick = { model.onEvent(PlaceEvent.RemovePlacePlaceEvent) },
+//                shape = MaterialTheme.shapes.extraLarge
+//            ) {
+//                Text(
+//                    text = stringResource(id = R.string.add_new_place),
+//                    style = MaterialTheme.typography.bodyLarge
+//                )
+//            }
+//
+//            Button(
+//                modifier = Modifier
+//                    .padding(vertical = 16.dp)
+//                    .height(56.dp)
+//                    .fillMaxWidth(0.2f),
+//                onClick = { model.onEvent(PlaceEvent.RemovePlacePlaceEvent) },
+//                shape = MaterialTheme.shapes.extraLarge
+//            ) {
+//                Text(
+//                    text = stringResource(id = R.string.remove_place),
+//                    style = MaterialTheme.typography.bodyLarge
+//                )
+//            }
+//
+//        }
 
     }
 
@@ -129,36 +185,23 @@ fun DisplayPlaces(navController: NavController, model: MainViewModel) {
     val state = model.state
 
 
-    Column {
+    Column(modifier = Modifier.fillMaxWidth()) {
         state.value.places.forEach { place ->
-            generateEntry(place)
+            generateEntry(place, model)
         }
 
         Spacer(modifier = Modifier.height(8.dp))
+
         Button(
             modifier = Modifier
-                .fillMaxWidth()
                 .padding(vertical = 16.dp)
-                .height(56.dp),
+                .height(56.dp)
+                .fillMaxWidth(0.2f),
             onClick = { navController.navigate(Screen.AddPlace.route) },
             shape = MaterialTheme.shapes.extraLarge
         ) {
             Text(
                 text = stringResource(id = R.string.add_new_place),
-                style = MaterialTheme.typography.bodyLarge
-            )
-        }
-
-        Button(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(vertical = 16.dp)
-                .height(56.dp),
-            onClick = { model.onEvent(PlaceEvent.RemovePlacePlaceEvent) },
-            shape = MaterialTheme.shapes.extraLarge
-        ) {
-            Text(
-                text = stringResource(id = R.string.remove_place),
                 style = MaterialTheme.typography.bodyLarge
             )
         }
