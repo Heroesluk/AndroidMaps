@@ -20,16 +20,16 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.myapplication.UI_logic.MainViewModel
 
 @Composable
-fun navigation(viewModel: MainViewModel) {
+fun navigation(viewModel: MainViewModel, navController: NavHostController) {
 
 
-    val navController = rememberNavController()
     NavHost(navController = navController, startDestination = Screen.DisplayPlaces.route) {
 
         composable(route = Screen.DisplayPlaces.route) {

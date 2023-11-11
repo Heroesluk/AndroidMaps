@@ -45,7 +45,6 @@ fun AddPlace(navController: NavController, viewModel: MainViewModel) {
     var placeEventDate by rememberSaveable { mutableStateOf("") }
 
 
-
     Column(
         modifier = Modifier
             .padding(16.dp, 16.dp)

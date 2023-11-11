@@ -39,6 +39,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.myapplication.UI_logic.PlaceEvent
 import com.example.myapplication.UI_logic.MainViewModel
 import com.example.myapplication.data.MockRepository
@@ -52,9 +53,6 @@ class MainActivity : ComponentActivity() {
 
     private val viewModel by viewModels<MainViewModel>()
 
-    var dataRepository: MockRepository = MockRepository(numbers)
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         println("tak")
 
@@ -63,39 +61,19 @@ class MainActivity : ComponentActivity() {
 
         setContent {
 //            mainDisplay()
-            navigation(viewModel)
+            val navController = rememberNavController()
+            viewModel.setNav(navController)
+            navigation(viewModel, navController)
 //            DisplayPlaces()
         }
     }
 }
 
 
-//@Composable
-//fun mainDisplay() {
-//    var navController = rememberNavController()
-//    var modifier = Modifier
-//    var startDestination: String = "place"
-//
-//
-//    NavHost(
-//        modifier = modifier,
-//        navController = navController,
-//        startDestination = startDestination
-//    ) {
-//        composable("place") {
-//            AddPlace(
-//                onNavigateToHome = { navController.navigate("home") },
-//                )
-//        }
-//        composable("home") {
-//            DisplayPlaces()
-//        }
-//    }
-//}
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun generateEntry(entry: Place, model: MainViewModel) {
+fun generateEntry(entry: Place, model: MainViewModel, navController: NavController) {
     var expanded by remember { mutableStateOf(false) }
     //this feels like affects performance hard so i'll leave it for now
 //    var dict = mapOf(true to 200.dp, false to 100.dp)
@@ -153,7 +131,7 @@ fun generateEntry(entry: Place, model: MainViewModel) {
                     .padding(vertical = 16.dp)
                     .height(56.dp)
                     .fillMaxWidth(0.5f),
-                onClick = { model.onEvent(PlaceEvent.EditPlace(entry.name)) },
+                onClick = { navController.navigate(Screen.AddPlace.route) },
                 shape = MaterialTheme.shapes.extraLarge
             ) {
                 Text(
@@ -190,7 +168,7 @@ fun DisplayPlaces(navController: NavController, model: MainViewModel) {
 
     Column(modifier = Modifier.fillMaxWidth()) {
         state.value.places.forEach { place ->
-            generateEntry(place, model)
+            generateEntry(place, model, navController)
         }
 
         Spacer(modifier = Modifier.height(8.dp))

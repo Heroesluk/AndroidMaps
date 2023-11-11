@@ -3,6 +3,8 @@ package com.example.myapplication.UI_logic
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import com.example.myapplication.R
 import com.example.myapplication.data.MockRepository
 import com.example.myapplication.data.numbers
@@ -16,6 +18,7 @@ class MainViewModel() : ViewModel() {
     private val placeRepository = MockRepository(numbers)
     private val _state = mutableStateOf(PlacesState())
     val state = _state
+    var navController: NavHostController? = null;
 
     init {
         getPlaces()
@@ -28,9 +31,12 @@ class MainViewModel() : ViewModel() {
             _state.value = _state.value.copy(places = entries)
 
         }
-
-
     }
+
+    fun setNav(navControllerPassed: NavHostController) {
+        navController = navControllerPassed;
+    }
+
 
     fun onEvent(placeEvent: PlaceEvent) {
         when (placeEvent) {
