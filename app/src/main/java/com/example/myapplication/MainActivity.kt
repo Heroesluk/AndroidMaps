@@ -45,6 +45,7 @@ import com.example.myapplication.UI_logic.MainViewModel
 import com.example.myapplication.data.MockRepository
 import com.example.myapplication.data.numbers
 import com.example.myapplication.model.Place
+import com.example.myapplication.viewmodel.PlaceViewmodel
 
 private val defaultSpacerSize = 16.dp
 
@@ -52,6 +53,8 @@ private val defaultSpacerSize = 16.dp
 class MainActivity : ComponentActivity() {
 
     private val viewModel by viewModels<MainViewModel>()
+    private val placeviewModel by viewModels<PlaceViewmodel>()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         println("tak")
@@ -63,12 +66,11 @@ class MainActivity : ComponentActivity() {
 //            mainDisplay()
             val navController = rememberNavController()
             viewModel.setNav(navController)
-            navigation(viewModel, navController)
+            navigation(viewModel, placeviewModel, navController)
 //            DisplayPlaces()
         }
     }
 }
-
 
 
 @OptIn(ExperimentalMaterial3Api::class)
