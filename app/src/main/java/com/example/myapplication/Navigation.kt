@@ -8,7 +8,11 @@ import com.example.myapplication.UI_logic.MainViewModel
 import com.example.myapplication.viewmodel.PlaceViewmodel
 
 @Composable
-fun navigation(viewModel: MainViewModel, placeViewmodel: PlaceViewmodel, navController: NavHostController) {
+fun navigation(
+    viewModel: MainViewModel,
+    placeViewmodel: PlaceViewmodel,
+    navController: NavHostController
+) {
 
 
     NavHost(navController = navController, startDestination = Screen.AddPlace.route) {

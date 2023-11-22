@@ -57,8 +57,6 @@ class MainActivity : ComponentActivity() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        println("tak")
-
 
         super.onCreate(savedInstanceState)
 
@@ -66,6 +64,7 @@ class MainActivity : ComponentActivity() {
 //            mainDisplay()
             val navController = rememberNavController()
             viewModel.setNav(navController)
+            placeviewModel.setNav(navController)
             navigation(viewModel, placeviewModel, navController)
 //            DisplayPlaces()
         }

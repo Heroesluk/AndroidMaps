@@ -20,7 +20,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -28,18 +27,13 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.example.myapplication.UI_logic.MainViewModel
 import com.example.myapplication.viewmodel.PlaceViewmodel
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AddPlace(navController: NavController, placeViewmodel: PlaceViewmodel) {
-
-    var placeName by rememberSaveable { mutableStateOf("") }
-    var placeDescription by rememberSaveable { mutableStateOf("") }
-    var placeLocation by rememberSaveable { mutableStateOf("") }
-    var placeScore by rememberSaveable { mutableStateOf("") }
-    var placeEventDate by rememberSaveable { mutableStateOf("") }
 
 
     Column(
@@ -63,8 +57,8 @@ fun AddPlace(navController: NavController, placeViewmodel: PlaceViewmodel) {
 
         TextField(
             modifier = Modifier.fillMaxWidth(),
-            value = placeName,
-            onValueChange = { placeName = it },
+            value = placeViewmodel.placeName,
+            onValueChange = { placeViewmodel.onChangePlaceName(it) },
             placeholder = { Text(text = "e.g. Eiffel Tower") },
         )
         Spacer(modifier = Modifier.padding(8.dp))
@@ -77,8 +71,8 @@ fun AddPlace(navController: NavController, placeViewmodel: PlaceViewmodel) {
 
         TextField(
             modifier = Modifier.fillMaxWidth(),
-            value = placeDescription,
-            onValueChange = { placeDescription = it },
+            value = placeViewmodel.placeDescription,
+            onValueChange = { placeViewmodel.onChangeDescription(it) },
             placeholder = { Text(text = "e.g. The smell under tower was really bad, and i got robbed") },
         )
 
@@ -91,8 +85,8 @@ fun AddPlace(navController: NavController, placeViewmodel: PlaceViewmodel) {
 
         TextField(
             modifier = Modifier.fillMaxWidth(),
-            value = placeLocation,
-            onValueChange = { placeLocation = it },
+            value = placeViewmodel.placeLocation,
+            onValueChange = { placeViewmodel.onChangeLocation(it) },
             placeholder = { Text(text = "e.g. Champ de Mars, 5 Av. Anatole Franc") },
         )
 
@@ -107,8 +101,8 @@ fun AddPlace(navController: NavController, placeViewmodel: PlaceViewmodel) {
         // TD: change it to enum hover stars / smh
         TextField(
             modifier = Modifier.fillMaxWidth(),
-            value = placeScore,
-            onValueChange = { placeScore = it },
+            value = placeViewmodel.placeRating,
+            onValueChange = { placeViewmodel.onRatingChange(it) },
             placeholder = { Text(text = "Range 1-5") },
         )
 
@@ -119,7 +113,7 @@ fun AddPlace(navController: NavController, placeViewmodel: PlaceViewmodel) {
             style = MaterialTheme.typography.bodyLarge
         )
 
-        Demo_ExposedDropdownMenuBox { placeEventDate = it }
+        Demo_ExposedDropdownMenuBox { placeViewmodel.placeEventDate = it }
 
 
         Button(
@@ -128,9 +122,7 @@ fun AddPlace(navController: NavController, placeViewmodel: PlaceViewmodel) {
                 .padding(vertical = 16.dp)
                 .height(56.dp),
             onClick = {
-
-                placeViewmodel.changeText()
-                navController.navigate(Screen.DisplayPlaces.route)
+                placeViewmodel.submitPlace()
             },
             shape = MaterialTheme.shapes.extraLarge
         ) {
