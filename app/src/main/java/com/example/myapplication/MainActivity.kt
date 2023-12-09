@@ -40,6 +40,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import app.cash.sqldelight.db.SqlDriver
+import app.cash.sqldelight.driver.android.AndroidSqliteDriver
 import com.example.myapplication.UI_logic.PlaceEvent
 import com.example.myapplication.UI_logic.MainViewModel
 import com.example.myapplication.data.MockRepository
