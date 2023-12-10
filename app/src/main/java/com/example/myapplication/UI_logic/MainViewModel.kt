@@ -3,7 +3,6 @@ package com.example.myapplication.UI_logic
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import com.example.myapplication.R
 import com.example.myapplication.data.MockRepository

@@ -8,3 +8,10 @@ plugins {
 }
 
 
+configurations.all {
+    resolutionStrategy.eachDependency {
+        if (requested.group == "com.google.dagger") {
+            useVersion("HEAD-SNAPSHOT")
+        }
+    }
+}

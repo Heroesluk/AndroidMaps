@@ -82,6 +82,8 @@ dependencies {
     implementation("app.cash.sqldelight:android-driver:2.0.0")
     implementation("com.squareup.sqldelight:coroutines-extensions-jvm:1.5.2")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version")
+    implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
+
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version")
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.4.2")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.4.2")
